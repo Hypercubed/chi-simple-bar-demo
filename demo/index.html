@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+</style>
+<body>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="./bar-chart.umd.js"></script>
+<script>
+
+var element = d3.select('body').append('div');
+
+var BarChart = barsChart.default;
+
+var chart = BarChart()
+  .width(900)
+  .height('auto');
+
+d3.tsv("data.tsv", type, function(error, data) {
+  if (error) throw error;
+
+  element
+    .datum(data)
+    .call(chart);
+
+});
+
+function type(d) {
+  d.frequency = +d.frequency;
+  return d;
+}
+
+</script>
